@@ -6,6 +6,18 @@
     --text-color: #333;
     --white-color: #fff;
     --shadow-color: rgba(0, 0, 0, 0.1);
+    --toggle-color: #333;
+    --placeholder-bg: #e0e0e0;
+}
+
+[data-theme="dark"] {
+    --primary-color: #5aa1f5;
+    --background-color: #121212;
+    --text-color: #e0e0e0;
+    --white-color: #1e1e1e;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --toggle-color: #f0f4f8;
+    --placeholder-bg: #333;
 }
 
 body {
@@ -17,6 +29,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -25,12 +38,15 @@ body {
     border-radius: 15px;
     box-shadow: 0 10px 30px var(--shadow-color);
     text-align: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
 }
 
 h1 {
     color: var(--primary-color);
     font-weight: 700;
     margin-bottom: 2rem;
+    transition: color 0.3s ease;
 }
 
 .numbers-container {
@@ -49,19 +65,19 @@ h1 {
     align-items: center;
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--white-color);
+    color: #fff;
     background: linear-gradient(145deg, #5aa1f5, #3a7bd5);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .number-placeholder {
-    background: #e0e0e0;
+    background: var(--placeholder-bg);
 }
 
 #generate-btn {
     background-color: var(--primary-color);
-    color: var(--white-color);
+    color: #fff;
     border: none;
     padding: 1rem 2.5rem;
     border-radius: 10px;
@@ -81,4 +97,28 @@ h1 {
 #generate-btn:active {
     transform: translateY(0);
     box-shadow: 0 2px 10px rgba(74, 144, 226, 0.4);
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--toggle-color);
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background-color: rgba(255,255,255,0.1);
 }

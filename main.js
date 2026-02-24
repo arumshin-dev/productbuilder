@@ -1,5 +1,8 @@
 const generateBtn = document.getElementById('generate-btn');
 const numbersContainer = document.querySelector('.numbers-container');
+const themeToggleBtn = document.getElementById('theme-toggle');
+const sunIcon = document.querySelector('.sun-icon');
+const moonIcon = document.querySelector('.moon-icon');
 
 generateBtn.addEventListener('click', () => {
     const numbers = generateLottoNumbers();
@@ -30,6 +33,41 @@ function displayNumbers(numbers) {
         numbersContainer.appendChild(numberDiv);
     });
 }
+
+// Theme Toggle Logic
+function initTheme() {
+    const currentTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (currentTheme === 'dark' || (!currentTheme && systemPrefersDark)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+    } else {
+        document.documentElement.removeAttribute('data-theme');
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+    }
+}
+
+themeToggleBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    
+    if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+    }
+});
+
+// Initialize theme on load
+initTheme();
 
 // Add CSS for fade-in animation
 const style = document.createElement('style');
