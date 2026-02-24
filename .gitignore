@@ -1,0 +1,10 @@
+.idx/
+.vscode/
+node_modules/
+
+blueprint.md
+firebase-debug.log
+GEMINI.md
+manifest.json
+package-lock.json
+package.json
